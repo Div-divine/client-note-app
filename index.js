@@ -37,8 +37,9 @@ function addNoteToView() {
 }
 
 function addNote() {
-  addNoteToModel();
-  addNoteToView();
+    addNoteToModel();
+    addNoteToView();
+
 }
 
 function resetInput() {
@@ -71,6 +72,7 @@ inputElem.addEventListener('change', function (event) {
 
 // gérer la soumission du formulaire.
 form.addEventListener('submit', async function (event) {
+
   // empêcher le rechargement de la page(comportement par défaut d'un form)
   event.preventDefault();
   if (isValid()) {
@@ -94,6 +96,7 @@ listElem.addEventListener('click', async function (event) {
 
   // Check if an update button was clicked then add text listed into the input field
   if (target.classList.contains('btn-update')) {
+    clickedUpdate = 1;
     const id = +target.getAttribute('data-id');
     console.log('Update button clicked with id:', id);
     inputElem.value = await listOne(id);
@@ -101,8 +104,6 @@ listElem.addEventListener('click', async function (event) {
     await NoteManager.update(id, inputElem.value);
     await refreshPage();
   }
-
-
 });
 
 document.querySelector('#error-msg span').innerText = minChars;
