@@ -97,6 +97,9 @@ listElem.addEventListener('click', async function (event) {
     const id = +target.getAttribute('data-id');
     console.log('Update button clicked with id:', id);
     inputElem.value = await listOne(id);
+    inputElem.value = inputElem.value;
+    await NoteManager.update(id, inputElem.value);
+    await refreshPage();
   }
 
 
@@ -122,7 +125,6 @@ refreshPage();
 
 async function listOne(id){
   const listOne = await NoteManager.listOne(id);
-  console.log(listOne);
   return listOne;
   
 }
